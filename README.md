@@ -1,4 +1,4 @@
-# Preact Resizable
+# Preact Resizable.
 
 ## Development guide
 
