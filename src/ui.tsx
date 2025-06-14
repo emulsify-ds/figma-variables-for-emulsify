@@ -144,7 +144,6 @@ const getVariablesIntoJSON = (variables: object) =>
           ) : (
             <div>
               <Button style={styles.btn} onClick={handleGetVariables}>{variables === null ? 'Get variables' : 'Refresh'}</Button>
-              
               {variables && (
                 <div>
                   <VerticalSpace space='medium' />
