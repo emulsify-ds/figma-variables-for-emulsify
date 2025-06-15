@@ -1,0 +1,56 @@
+/* ui.css */
+.header {
+  color: #fff;
+  font-size: 22px;
+  line-height: 150%;
+  font-weight: bold;
+}
+
+.copy-output {
+  background-color: #CCECFA;
+  color: #00202E;
+  border: 1px solid #00202E;
+  border-radius: 0.25rem;
+  overflow: auto;
+  max-height: 300px;
+  padding: 2.5rem 0.5rem 0.5rem;
+}
+
+.copy-button {
+  position: absolute;
+  right: 1.5rem;
+  top: 0.5rem;
+  background-color: #CCECFA;
+  color: #00202E;
+  border: 1px solid #00202E;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.copy-button:hover,
+.copy-button:focus {
+  background-color: #9CE1FF;
+  color: #00141D;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+  background-color: #9CE1FF;
+  color: #00202E;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.relative {
+  position: relative;
+}

@@ -222,7 +222,7 @@ async function processColorVariable(
   }
 }
 
-async function handleVariables(): Promise<object> {
+async function handleVariables(): Promise<void> {
   try {
     const collections =
       await figma.variables.getLocalVariableCollectionsAsync();
@@ -241,7 +241,6 @@ async function handleVariables(): Promise<object> {
         }
       }
     }
-    // return allVariables;
     sendUIMessage({ type: 'variables', variables: allVariables });
     sendUIMessage({ type: 'complete' });
   } catch (error) {

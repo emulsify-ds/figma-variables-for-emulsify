@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { emit } from '@create-figma-plugin/utilities'
 import { render, Container, Text, VerticalSpace, Button } from '@create-figma-plugin/ui'
 import backgroundTexture from './assets/wave-background.png'
+import '!./ui.css'
 
 interface PluginMessage {
   type: 'complete' | 'variables' | 'copy';
@@ -13,7 +14,7 @@ interface PluginMessage {
 function Plugin() {
   const [isLoading, setIsLoading] = useState(false)
   const [showToast, setShowToast] = useState(false)
-  const [variables, setVariables] = useState<string[] | null>(null)
+  const [variables, setVariables] = useState<object | null>(null)
 
   useEffect(() => {
     if (variables !== null) {
@@ -93,8 +94,8 @@ function Plugin() {
     setShowToast(true);
   };
 
-const getVariablesIntoJSON = (variables: object) => 
-  `const variables = ${JSON.stringify(variables, null, 2)};`;
+  const getVariablesIntoJSON = (variables: object) => 
+    `const variables = ${JSON.stringify(variables, null, 2)};`;
 
   const styles = {
     wrapper: {
@@ -111,54 +112,34 @@ const getVariablesIntoJSON = (variables: object) =>
       backgroundPosition: 'bottom center',
       backgroundSize: '100% auto',
     },
-    header: {
-      color: '#ffff',
-      fontSize: '22px',
-      lineHeight: '150%',
-      fontWeight: 'bold',
-    },
-    copytoclipboard: {
-      backgroundColor: '#CCECFA',
-      color: '#00202E',
-    },
-    btn: {
-      display: 'flex',
-      alignItems: 'center',
-      borderRadius: '4px',
-      background: '#9CE1FF',
-      color: '#00202E',
-      fontSize: '16px',
-      fontWeight: '700',
-      padding: '16px',
-      marginTop: '16px',
-    }
   };
 
   return (
      <Container space='medium' style={styles.wrapper}>
-        <Text style={styles.header}>Export Variables for Emulsify</Text>
+        <Text className="header">Export Variables for Emulsify</Text>
           {isLoading ? (
             <Button loading onClick={handleGetVariables}>
               Loading
             </Button>
           ) : (
             <div>
-              <Button style={styles.btn} onClick={handleGetVariables}>{variables === null ? 'Get variables' : 'Refresh'}</Button>
+              <button className="button" onClick={handleGetVariables}>{variables === null ? 'Get variables' : 'Refresh'}</button>
               {variables && (
                 <div>
                   <VerticalSpace space='medium' />
                   <div className="relative">
-                    <Button 
+                    <button 
                       onClick={handleCopyClick}
                       title="Copy to clipboard"
+                      className="copy-button"
                     >
                       Copy
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                       </svg>
-                    </Button>
-                    <pre style={styles.copytoclipboard}>
+                    </button>
+                    <pre className="copy-output">
                       {getVariablesIntoJSON(variables)}
                     </pre>
                   </div>
